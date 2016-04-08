@@ -19,6 +19,29 @@ public class HeatmapGenerator{
    
    private static void overlayPoints(int[][] array){
       // Paint graphics to image file here
+      /*
+      http://stackoverflow.com/questions/2318020/merging-two-images
+      
+      File path = ... // base path of the images
+
+      // load source images
+      BufferedImage image = ImageIO.read(new File(path, "image.png"));
+      BufferedImage overlay = ImageIO.read(new File(path, "overlay.png"));
+      
+      // create the new image, canvas size is the max. of both image sizes
+      int w = Math.max(image.getWidth(), overlay.getWidth());
+      int h = Math.max(image.getHeight(), overlay.getHeight());
+      BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+      
+      // paint both images, preserving the alpha channels
+      Graphics g = combined.getGraphics();
+      g.drawImage(image, 0, 0, null);
+      g.drawImage(overlay, 0, 0, null);
+      
+      // Save as new image
+      ImageIO.write(combined, "PNG", new File(path, "combined.png"));
+      
+      */
    }
    
    // Normalize points to a 255 scale to be used for RGB color intensity
@@ -49,6 +72,15 @@ public class HeatmapGenerator{
         }
         
         return array;
+   }
+   
+   // Normalize values of all points to the relative averages of their closest 8 neighbors
+   // Only do a single pass to start off
+   public static int[][] normalizePointsWithNeighborAveraging(int[][] array){
+      // TODO: Finish this function lol
+      int[][] ret = new int[1][1];
+      
+      return ret;
    }
    
    private static void buildHeatmap(int[][] map) throws IOException{
