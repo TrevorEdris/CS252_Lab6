@@ -7,24 +7,20 @@ import java.util.*;
 public class HeatmapTester{
 
    public static void main(String[] args){
-        int[][] arr = new int[50][50];
+        int length = 50;
+        int[][] arr = new int[length][length];
         Random rand = new Random();
         
         // Fill array with values from 0 to 50
         for(int i = 0; i < arr.length; i++){
             for(int j = 0; j < arr[0].length; j++){
-               arr[i][j] = rand.nextInt(51);
+               arr[i][j] = rand.nextInt(length + 1);
             }
         }
         
-        // Normalize points to a 255 scale
-        arr = HeatmapGenerator.normalizePoints(arr);
+        // Generate heatmap corresponding to the array
+        HeatmapGenerator.generateMap(arr);
         
-        /*for(int i = 0; i < arr.length; i++){
-            for(int j = 0; j < arr[0].length; j++){
-               print("arr[" + i + "][" + j + "]: " + arr[i][j] + "\n");
-            }
-        }*/
    }
 
    private static void print(String s){

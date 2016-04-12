@@ -15,6 +15,16 @@ public class HeatmapGenerator{
    public static void generateMap(int[][] array){
       // Use helper functions to overlay points of kills onto map
       // and then generate an image file
+      int[][] arr1 = normalizePoints(array);
+      int[][] arr2 = normalizePointsWithNeighborAveraging(array);
+      
+      try{
+           createTestImageFromGraphics();
+           buildHeatmap(arr1);
+           buildHeatmap(arr2, "neighbor_avgs.png");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
    }
    
    private static void overlayPoints(int[][] array){
@@ -64,13 +74,6 @@ public class HeatmapGenerator{
             }
         }
         
-        try{
-           createTestImageFromGraphics();
-           buildHeatmap(array);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        
         return array;
    }
    
@@ -78,14 +81,73 @@ public class HeatmapGenerator{
    // Only do a single pass to start off
    public static int[][] normalizePointsWithNeighborAveraging(int[][] array){
       // TODO: Finish this function lol
-      int[][] ret = new int[1][1];
+      int[][] ret = new int[array.length][array[0].length];
+      
+      int temp = 0;
+      int tempAvg = 0;
+      int neighbors = 0;
+      for(int i = 0; i < array.length; i++){
+         for(int j = 0; j < array[0].length; j++){
+            tempAvg = 0;
+            neighbors = 0;
+            // Check all surrounding cells (8 total)
+            // Top Left
+            temp = arrayIndex(array, i, j, i - 1, j - 1);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            // Top Mid
+            temp = arrayIndex(array, i, j, i, j - 1);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            // Top Right
+            temp = arrayIndex(array, i, j, i + 1, j - 1);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            
+            // Mid Left
+            temp = arrayIndex(array, i, j, i - 1, j);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            // Mid Right
+            temp = arrayIndex(array, i, j, i + 1, j);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            
+            // Bot Left
+            temp = arrayIndex(array, i, j, i - 1, j + 1);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            // Bot Mid
+            temp = arrayIndex(array, i, j, i, j + 1);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            // Bot Right
+            temp = arrayIndex(array, i, j, i + 1, j + 1);
+            if(temp != -1){tempAvg+=temp; neighbors++;}
+            
+            tempAvg = (int)(tempAvg / neighbors);
+            ret[i][j] = tempAvg;
+            
+            print("ret[" + i + "][" + j + "] = " + ret[i][j] + " and has " + neighbors + " neighbors.\n");
+         }
+      }
       
       return ret;
    }
    
-   private static void buildHeatmap(int[][] map) throws IOException{
+   private static int arrayIndex(int[][] array, int curX, int curY, int neiX, int neiY){
+      int ret = -1;
+      try{
+         ret = array[neiX][neiY];
+      }catch(IndexOutOfBoundsException e){
+         // Do nothing here
+      }
+      return ret;
+   }
+   
+   private static void buildHeatmap(int[][] map, String name){
       // Create BufferedImage of 1:1 scale from map
-      BufferedImage bf = new BufferedImage(map.length * 10, map[0].length * 10, BufferedImage.TYPE_INT_RGB);
+      BufferedImage bf = new BufferedImage(map.length * 5, map[0].length * 5, BufferedImage.TYPE_INT_RGB);
       
       // Create a graphics object used to draw into the buffered image
       Graphics2D g2d = bf.createGraphics();
@@ -94,7 +156,7 @@ public class HeatmapGenerator{
       for(int i = 0; i < map.length; i++){
          for(int j = 0; j < map[i].length; j++){
             g2d.setColor(getColorFromDensity(map[i][j]));
-            g2d.fillRect(i * 10, j * 10, 10, 10);
+            g2d.fillRect(i * 5, j * 5, 5, 5);
             //print("Filling rect[" + (i * 10) + "][" + (j * 10) + "] with " + map[i][j] + "\n");
          }
       }
@@ -104,24 +166,54 @@ public class HeatmapGenerator{
       g2d.dispose();
       
       // Save as png
-      File file = new File("map.png");
-      ImageIO.write(bf, "png", file);
+      File file = new File(name);
+      try{
+         ImageIO.write(bf, "png", file);
+      }catch(IOException e){
+         e.printStackTrace();
+      }
+   }
+   
+   private static void buildHeatmap(int[][] map) throws IOException{
+      buildHeatmap(map, "map.png");
    }
    
    private static Color getColorFromDensity(int x){
-      if(x >= 0 && x <= 51){
-         return Color.white;
-      }else if(x > 51 && x <= 102){
-         return Color.green;
-      }else if(x > 102 && x <= 153){
-         return Color.yellow;
-      }else if(x > 153 && x <= 204){
-         return Color.orange;
-      }else if(x > 204){
-         return Color.red;
-      }else{
-         return Color.black;
+      /* List of Colors and respective ranges
+            * White        : 0,31
+            * Light Gray   : 32,63
+            * Green        : 64,95
+            * Yellow       : 96,127
+            * Orange       : 128,159
+            * Red          : 160,191
+            * Pink         : 192,223
+            * Magenta      : 224,255
+      */
+   
+      Color c = new Color(255,255,255,255);
+      if(x >= 0 && x <= 31){
+         c = new Color(255,255,255,255);
+      }else if(x > 31 && x <= 63){
+         c = Color.lightGray;
+      }else if(x > 63 && x <= 95){
+         c = Color.green;
+      }else if(x > 95 && x <= 127){
+         c = Color.yellow;
+      }else if(x > 127 && x <= 159){
+         c =  Color.orange;
+      }else if(x > 159 && x <= 191){
+         c =  Color.red;
+      }else if(x > 191 && x <= 223){
+         c = Color.pink;
+      }else if(x > 223 && x <= 255){
+         c = Color.magenta;
       }
+      
+      // Set the alpha value
+      int alpha = 255 - (255 - x) % 32;
+      c = new Color(c.getRed(), c.getGreen(), c.getBlue(), alpha); 
+      
+      return c;
    }
    
    private static void createTestImageFromGraphics() throws IOException{
