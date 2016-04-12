@@ -128,7 +128,7 @@ public class HeatmapGenerator{
             tempAvg = (int)(tempAvg / neighbors);
             ret[i][j] = tempAvg;
             
-            print("ret[" + i + "][" + j + "] = " + ret[i][j] + " and has " + neighbors + " neighbors.\n");
+            //print("ret[" + i + "][" + j + "] = " + ret[i][j] + " and has " + neighbors + " neighbors.\n");
          }
       }
       
