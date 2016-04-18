@@ -1,26 +1,17 @@
-# CS252_Lab6
-Halo5Heatmaps
+This README.md file is displayed on your project page. You should edit this 
+file to describe your project, including instructions for building and 
+running the project, pointers to the license under which you are making the 
+project available, and anything else you think would be useful for others to
+know.
 
-This program is a Web App that will generate heat maps for kills in Halo 5. The map will visually display the frequency of kills for all locations on the maps of Halo 5.
-This is a WIP by Purdue students for the class CS 252 - System Programming, Spring 2016.
+We have created an empty license.txt file for you. Well, actually, it says,
+"<Replace this text with the license you've chosen for your project.>" We 
+recommend you edit this and include text for license terms under which you're
+making your code available. A good resource for open source licenses is the 
+[Open Source Initiative](http://opensource.org/).
 
-===========================================
-            IBM Bluemix API's Used
-===========================================
- * Java Cloudant Web Starter Boilerplate
- * Liberty for Java
- * NoSQL Database for Java
+Be sure to update your project's profile with a short description and 
+eye-catching graphic.
 
-
-===========================================
-            Student Developers
-===========================================
- * Trevor Edris  - tedris@purdue.edu
- * Isaac Lepow   - ilepow@purdue.edu
- * Brian Kaetzel - bkaetzel@purdue.edu
-
-
-
-Maps courtesy of: https://drive.google.com/folderview?id=0B9ekAtjKL9zKbkcyaUxoS1kwN28&usp=sharing
-
-This application is offered by Trevor Edris, which is solely responsible for its content. It is not sponsored or endorsed by Microsoft. This application uses the Halo® Game Data API. Halo © 2016 Microsoft Corporation. All rights reserved. Microsoft, Halo, and the Halo Logo are trademarks of the Microsoft group of companies.
+Finally, consider defining some sprints and work items in Track & Plan to give 
+interested developers a sense of your cadence and upcoming enhancements.
