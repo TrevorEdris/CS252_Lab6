@@ -1,0 +1,268 @@
+/* style.css
+ * This file provides css styles.
+ */
+
+body,html {
+	background-image:url(images/background3.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 0 auto;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+		"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	color: #ffffff;
+}
+
+/* header footer common */
+header, footer {
+	width: 100%;
+	text-align: center;
+	color: #fff;
+}
+
+
+
+@media (max-width: 600px){
+	.title, .tips, section{
+		width: 100%;
+	}
+}
+
+/* alignment */
+.title, .tips, section {
+	margin: 0 auto;
+}
+
+/* foreground color */
+.title, .tips {
+	xbackground-color: #2dcc70;
+}
+
+
+
+/* positions */
+header {
+	padding-top: 20px;
+	font-weight: bolder;
+	font-size: 1.3em;
+}
+footer {
+	position: relative;
+}
+.title, .tips {
+	height: 100px;
+	padding-top: 20px;
+	position: relative;
+}
+.title {
+	border-radius: 40px 40px 0 0;
+}
+.tips {
+	border-radius: 0 0 40px 40px;
+}
+
+table {
+	table-layout: fixed;
+	word-wrap: break-word;
+	position: relative;
+	border-collapse: collapse;
+	width: 100%;
+}
+.content {
+	padding: 5px;
+	width: 60%;
+
+}
+.contentName {
+	padding: 5px;
+	width: 30%;
+	font-weight:bold;
+}
+.contentAction {
+	padding: 5px;
+	width: 10%;
+	font-weight:bold;
+}
+
+.records textarea {
+	height: 1.2em;
+	font-size: 1em;
+	resize: none;
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	color: #fff;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+		"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: .9em;
+}
+
+
+
+/* buttons */
+.detailBtn {
+	position: absolute;
+	left: 20px;
+	top: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+.addBtn {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.detailBtn img{
+	width: 20px;
+	height: 20px;
+}
+.deleteBtn{
+  background-image: url("images/sprite.png");
+  background-position: -5px -588px;
+  width: 16px;
+  height: 16px;
+    display:inline-block;
+}
+
+tr:hover .deleteBtn {
+	
+	cursor: pointer;
+}
+
+
+.tableRows{
+	border-bottom: solid thin;
+	border-color:#26343f;
+}
+
+.leftHalf {
+	float: left;
+	background-color: #313f4a;
+	padding-left: 20px;
+	width: 15%;
+	height: 50%;
+}
+
+.rightHalf {
+	float: right;
+	width: 75%;
+	padding-top: 5%;
+	padding-right: 5%;
+	height: 50%;
+	overflow: auto;
+}
+
+.fieldname {
+	text-align: right;
+	border-right: 1px solid #fff;
+}
+
+
+#appinfo {
+	border-top: 1px solid #fff;
+}
+#appinfo td {
+	padding: 5px;
+	height: 50;
+	font-size: small;
+	
+}
+
+
+
+.errorMsg {
+	color: red;
+	font-weight:normal;
+}
+.newappIcon {
+  padding-top: 2%;
+  align: middle;
+  max-width: 75%;
+  max-height: 60%;
+  margin: 0 auto;
+  padding-bottom: 2em;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2em;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.text {
+  font-weight: normal;
+  font-size: 1.5em;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+#button {
+	margin: 0 auto;
+	display: block;
+}
+
+.description {
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #00aed1;
+}
+
+#cssmenu {
+	background: #333; 
+	list-style: none;  
+	margin: 0;  
+	padding: 0;
+	width: 12em;
+}
+
+
+#cssmenu li {
+	font: 100% "Lucida Sans Unicode", "Bitstream Vera Sans", 
+		"Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;  
+	margin: 0; 
+	padding: 0;  
+	list-style: none;
+}
+
+
+#cssmenu a {
+	background: #333;
+	border-bottom: 1px solid #393939;
+  	color: #ccc;
+	display: block;
+	margin: 0;
+	padding: 8px 12px;
+	text-decoration: none;
+	font-weight: normal;
+
+}
+
+
+#cssmenu a:hover { 
+	background: #2580a2 url("images/hover.gif") left center no-repeat; 
+	color: #fff;  
+	padding-bottom: 8px;
+}
+
+.hide{
+	visibility: hidden;
+}
+
+.unhide {
+	display: block;
+}
+
